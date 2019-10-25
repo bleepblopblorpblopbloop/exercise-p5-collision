@@ -1,5 +1,3 @@
-
-
 function setup() {
     createCanvas(WIDTH, HEIGHT);
 }
@@ -7,20 +5,29 @@ function setup() {
 const listOfAtoms = [];
 
 for (let i = 0; i < n; i++) {
-    listOfAtoms.push(new Atom({ randomRate, color: colors[i % colors.length] }))
+    listOfAtoms.push(new Atom({
+        randomRate,
+        color: colors[i % colors.length]
+    }))
 }
 
 function draw() {
     clear()
     listOfAtoms.forEach(x => {
         x.create();
+        x.collisionCheck(listOfAtoms);
     });
+
+
 }
 
 
 
 // 2 ) CREATE DISTANCE FUNCTION 
 
+const distance = (a, b) => {
+    return Math.sqrt((a.position[0] - b.position[0]) ** 2 + (a.position[1] - b.position[1]) ** 2)
+}
 
 
 
@@ -57,9 +64,7 @@ function draw() {
 
 
 
-// const distance = (a, b) => {
-//     return Math.sqrt((a.position[0] - b.position[0]) ** 2 + (a.position[1] - b.position[1]) ** 2)
-// }
+
 
 
 
@@ -75,4 +80,3 @@ function draw() {
 //     })
 //     console.log(updatedScores)
 // }
-
